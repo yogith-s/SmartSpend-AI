@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="SmartSpend AI helps students track expenses, plan budgets and discover saving opportunities." />
+  <title>SmartSpend AI | Student Finance Companion</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <aside class="sidebar">
+    <div class="brand"><span class="brand-mark">S</span><span>SmartSpend <b>AI</b></span></div>
+    <p class="side-label">WORKSPACE</p>
+    <a class="nav active" href="#overview">▦ <span>Overview</span></a>
+    <a class="nav" href="#transactions">↕ <span>Transactions</span></a>
+    <a class="nav" href="#insights">✧ <span>AI Insights</span></a>
+    <div class="sidebar-bottom">
+      <div class="student-card"><div class="avatar">ST</div><div><b>Student account</b><small>Personal workspace</small></div></div>
+      <small class="muted">Smart money habits start small.</small>
+    </div>
+  </aside>
+
+  <main class="main" id="overview">
+    <header class="topbar">
+      <div><p class="eyebrow">STUDENT FINANCE COMPANION</p><h1>Good day 👋</h1><p class="muted">A clearer picture of where your money goes.</p></div>
+      <button class="button primary" id="addTop">＋ Add expense</button>
+    </header>
+
+    <section class="hero-row">
+      <div class="hero-card">
+        <div class="hero-copy"><span class="eyebrow light">MONTHLY BUDGET</span><h2 id="budgetHero">₹5,000</h2><p id="budgetCaption">You have ₹5,000 left this month.</p></div>
+        <div class="budget-ring" id="budgetRing"><div><strong id="budgetPercent">0%</strong><small>used</small></div></div>
+      </div>
+      <div class="tip-card"><span class="tip-icon">✦</span><div><b>Small steps, better control</b><p>Track everyday spending to spot patterns and make more intentional choices.</p></div></div>
+    </section>
+
+    <section class="stats-grid">
+      <article class="stat-card"><span class="stat-label">Total spent</span><strong id="totalSpent">₹0</strong><small class="muted">This month</small></article>
+      <article class="stat-card"><span class="stat-label">Transactions</span><strong id="transactionCount">0</strong><small class="muted">Recorded entries</small></article>
+      <article class="stat-card"><span class="stat-label">Daily average</span><strong id="dailyAverage">₹0</strong><small class="muted">Based on this month</small></article>
+      <article class="stat-card"><span class="stat-label">Potential savings</span><strong id="potentialSavings">₹0</strong><small class="muted">Suggested opportunity</small></article>
+    </section>
+
+    <section class="content-grid">
+      <article class="panel chart-panel">
+        <div class="panel-head"><div><h3>Spending breakdown</h3><p class="muted">Where your money is going</p></div><span class="pill">This month</span></div>
+        <div class="chart-wrap"><canvas id="categoryChart"></canvas></div>
+        <div id="categoryLegend" class="legend"></div>
+      </article>
+      <article class="panel">
+        <div class="panel-head"><div><h3>Budget planner</h3><p class="muted">Set a monthly spending limit</p></div></div>
+        <label for="budgetInput">Monthly budget (₹)</label>
+        <div class="budget-edit"><input id="budgetInput" type="number" min="1" value="5000" /><button class="button dark" id="saveBudget">Save</button></div>
+        <div class="progress-track"><div id="progressFill"></div></div>
+        <p class="muted small" id="budgetStatus">Your budget is ready.</p>
+        <hr />
+        <button class="button outline full" id="resetData">Reset demo data</button>
+      </article>
+    </section>
+
+    <section class="content-grid lower-grid">
+      <article class="panel" id="transactions">
+        <div class="panel-head"><div><h3>Recent transactions</h3><p class="muted">Your latest recorded expenses</p></div><button class="text-button" id="addInline">＋ Add new</button></div>
+        <div class="table-wrap"><table><thead><tr><th>DESCRIPTION</th><th>CATEGORY</th><th>DATE</th><th class="right">AMOUNT</th></tr></thead><tbody id="transactionRows"></tbody></table></div>
+      </article>
+      <article class="panel insight-panel" id="insights">
+        <div class="panel-head"><div><h3>AI spending insights</h3><p class="muted">Explainable recommendations</p></div><span class="sparkle">✧</span></div>
+        <div id="insightList" class="insight-list"></div>
+        <p class="disclaimer">Demo note: insights are generated from transparent budgeting rules using the sample or entered data. No bank account is connected.</p>
+      </article>
+    </section>
+    <footer>SmartSpend AI · Student finance made understandable · Demo uses local browser storage only</footer>
+  </main>
+
+  <dialog id="expenseDialog">
+    <form method="dialog" id="expenseForm">
+      <div class="dialog-head"><div><p class="eyebrow">NEW ENTRY</p><h2>Add an expense</h2></div><button class="close" value="cancel" aria-label="Close">×</button></div>
+      <label for="expenseName">Description</label><input id="expenseName" required maxlength="40" placeholder="e.g. Lunch" />
+      <div class="form-row"><div><label for="expenseAmount">Amount (₹)</label><input id="expenseAmount" required type="number" min="1" max="100000" placeholder="120" /></div>
+      <div><label for="expenseCategory">Category</label><select id="expenseCategory"><option>Food</option><option>Travel</option><option>Education</option><option>Shopping</option><option>Entertainment</option><option>Other</option></select></div></div>
+      <label for="expenseDate">Date</label><input id="expenseDate" type="date" required />
+      <button class="button primary full" id="saveExpense" value="default">Save expense</button>
+    </form>
+  </dialog>
+  <script src="app.js"></script>
+</body>
+</html>
